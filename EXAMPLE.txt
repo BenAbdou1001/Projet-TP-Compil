@@ -1,0 +1,114 @@
+CHARACTER ROUTINE func1(arg1, arg2, arg3)
+
+    WRITE("first: ", arg1, "\n");
+    WRITE("second: ", arg2, "\n");
+    WRITE("third: ", arg3, "\n");
+func1 = "HELLO"
+ENDR
+
+INTEGER ROUTINE func2() 
+func2 = 5 * 5
+ENDR
+
+REAL ROUTINE func3()
+    INTEGER  y=1000 , z=500;
+    REAL x = y + z ;
+    x = x / 3 ;
+    x = x - 100 ;
+    x = x * x ;
+func3 = x
+ENDR 
+
+LOGICAL ROUTINE func4(arg1)
+    LOGICAL cond;
+    INTEGER s = 5; 
+    IF ((arg1.EQ.s).AND.(s.LT.6)) THEN
+        cond=FALSE;
+    ELSE
+        cond=TRUE;
+    ENDIF
+func4=cond
+ENDR
+
+INTEGER ROUTINE func5()
+    INTEGER u=20, v=30, w=56;
+    v = u;
+    u = w;
+    w = v;
+func5 = u + v + w
+ENDR
+
+REAL ROUTINE func6(arg1, arg2)
+    REAL o=7, r=1 , v; 
+    IF ((arg1.GT.r).OR.(arg2.EQ.r)) THEN
+        v = o / r;
+    ELSE
+        v = 0;
+    ENDIF
+func6 = v * 5
+ENDR
+
+CHARACTER ROUTINE func7()
+    CHARACTER g*10="TEST";
+func7 = g
+ENDR
+
+INTEGER ROUTINE func8(arg1)
+    INTEGER j=10,f=45,k=1;
+    DOWHILE(j.EQ.0)
+        j=j-k;
+        IF(f.NE.50) THEN
+            f=f+arg1;
+        ENDIF
+    ENDDO
+func8 = f
+ENDR
+
+INTEGER ROUTINE func10(arg1,arg2,arg3)
+    INTEGER T=arg1,U,V;
+    T = CALL func2 ();
+    U = CALL func5 ();
+    U = U + arg2 ;
+    V = CALL func8 (T);
+func10 = T + arg3 * U * V
+ENDR
+
+PROGRAM HelloAcad
+% Déclarations;
+    INTEGER A=90,B,C ; 
+    REAL Y=77.89; 
+    INTEGER TAB DIMENSION (10) ;
+    LOGICAL a;
+    REAL b, c, d;
+    CHARACTER ch DIMENSION(100);
+    CHARACTER p*50;
+    INTEGER r;
+
+% Instructions;
+    A = TAB(10) + (B * 7);
+    B = 30;
+    C = 22+10*B;
+    b = b + (c - d) * 10;
+    p = CALL func1(A,B,C);
+    READ(c);
+    Y = CALL func6(c, d);
+    p = CALL func7();
+    A = CALL func8(B);
+
+    DOWHILE (((b.LT.(d - c)).OR.(a.EQ.TRUE)))
+    
+        WRITE("ch est ", ch(1), "\n.");
+
+        IF (b.GT.(c + 1)) THEN
+            d = CALL func2();
+        ELSE
+            READ(c);
+        ENDIF
+    ENDDO
+
+    d=CALL func3();
+    EQUIVALENCE (A, B, C), (Y, TAB(3));
+    a = CALL func4(TAB(4));
+    d = CALL func5();
+    r = CALL func10(A,B,C);
+END.
